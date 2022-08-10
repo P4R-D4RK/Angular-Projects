@@ -16,3 +16,6 @@ npm install
 ```
 ng serve
 ```
+
+# Author
+Luis Engelberth Polina Romo
