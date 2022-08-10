@@ -9,11 +9,11 @@ export class SidebarComponent {
 
   get historial() {
     return this.gifService.historial;
-  }  
+  }
 
-  constructor( private gifService: GifsService) { }
+  constructor(private gifService: GifsService) { }
 
-  buscar( termino: string){
+  buscar(termino: string) {
     this.gifService.buscarGifs(termino);
   }
 }
