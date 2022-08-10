@@ -19,3 +19,5 @@ ng serve
 
 # Author
 Luis Engelberth Polina Romo
+
+[Linkedin](https://www.linkedin.com/in/luis-engelberth-p-890526129/)
