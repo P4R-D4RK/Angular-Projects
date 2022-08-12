@@ -30,9 +30,9 @@ export class BarrasComponent implements OnInit {
   public barChartData: ChartData<'bar'> = {
     labels: [ '2020', '2021', '2022', '2023', '2024', '2025', '2026' ],
     datasets: [
-      { data: [ 65, 59, 80, 81, 56, 75, 40 ], label: 'Series A', backgroundColor: '#5C6169', hoverBackgroundColor: 'green', hoverBorderColor: 'green', borderColor: 'gray' },
-      { data: [ 32, 34, 40, 69, 86, 60, 80 ], label: 'Series B', backgroundColor: '#4186FA', hoverBackgroundColor: 'green', hoverBorderColor: 'green', borderColor: 'gray' },
-      { data: [ 88, 48, 77, 45, 64, 37, 50 ], label: 'Series C', backgroundColor: '#293EE0', hoverBackgroundColor: 'green', hoverBorderColor: 'green', borderColor: 'gray' }
+      { data: [ 65, 59, 80, 81, 56, 75, 40 ], label: 'Series A', backgroundColor: '#5C6169', hoverBackgroundColor: '#FFCE70', hoverBorderColor: 'green', borderColor: 'gray' },
+      { data: [ 32, 34, 40, 69, 86, 60, 80 ], label: 'Series B', backgroundColor: '#4186FA', hoverBackgroundColor: '#FFCE70', hoverBorderColor: 'green', borderColor: 'gray' },
+      { data: [ 88, 48, 77, 45, 64, 37, 50 ], label: 'Series C', backgroundColor: '#375DFA', hoverBackgroundColor: '#FFCE70', hoverBorderColor: 'green', borderColor: 'gray' }
     ]
   };
   
