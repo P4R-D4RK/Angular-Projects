@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChartData, ChartType } from 'chart.js';
+import { ChartData, ChartType, ChartConfiguration } from 'chart.js';
 
 @Component({
   selector: 'app-dona',
@@ -25,4 +25,7 @@ export class DonaComponent {
     ],
   };
   public doughnutChartType: ChartType = 'doughnut';
+  opcionesGrafica: ChartConfiguration['options'] = {
+    responsive: true,
+  };
 }
