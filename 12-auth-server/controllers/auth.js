@@ -15,11 +15,23 @@ const crearUsuario = async (req, res = response) => {
       });
     }
 
+    // Crear usuario con el modelo
+    usuario = new Usuario( req.body );
+
     // Hashear la contraseña
 
     // Generar JWT
 
+    // Crear usuario de DB
+    await usuario.save();
+
     // Generar respuesta exitosa
+    return res.status(201).json({
+      ok: true,
+      uid: usuario.id,
+      name
+    })
+
   } catch (error) {
     console.log(error);
     return res.status(500).json({
