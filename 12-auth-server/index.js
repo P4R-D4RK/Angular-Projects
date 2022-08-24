@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
-const { dbConnection } = require('./db/config');
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+const { dbConnection } = require("./db/config");
+require("dotenv").config();
 
 // Crear el servidor/aplicación de express
 const app = express();
@@ -10,17 +10,17 @@ const app = express();
 dbConnection();
 
 // Directorio Público
-app.use( express.static('public'));
+app.use(express.static("public"));
 
 // CORS
-app.use( cors() );
+app.use(cors());
 
 // Lectura y parseo del body
-app.use( express.json() );
+app.use(express.json());
 
 // Routes
-app.use( '/api/auth', require('./routes/auth') )
+app.use("/api/auth", require("./routes/auth"));
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server running on the port ${process.env.PORT}`);
-})
+  console.log(`Server running on the port ${process.env.PORT}`);
+});
