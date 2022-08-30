@@ -8,8 +8,13 @@
 </p>
 
 <h4>User info</h4>
-<pre> {{ user | json }} </pre>
+<ul>
+    <li>uid:<p>{{ user.uid }}</p></li>
+    <li>name:<p>{{ user.name }}</p></li>
+    <li>email:<p>{{ user.email }}</p></li>
+</ul>
+<!--<pre> {{ user | json }} </pre>-->
 
-<button (click)="logout()">
+<button (click)="logout()" id="log">
     Logout
 </button>

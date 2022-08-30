@@ -25,7 +25,7 @@ const crearUsuario = async (req, res = response) => {
     usuario.password = bcrypt.hashSync( password, salt );
 
     // Generar JWT
-    const token = await generarJWT(usuario.id, name);
+    const token = await generarJWT(usuario.id, name, email);
 
     // Crear usuario de DB
     await usuario.save();
@@ -35,7 +35,8 @@ const crearUsuario = async (req, res = response) => {
       ok: true,
       uid: usuario.id,
       name,
-      token
+      token,
+      email
     })
 
   } catch (error) {
@@ -73,14 +74,15 @@ const loginUsuario = async(req, res = response) => {
     }
 
     // Generar el JWT
-    const token = await generarJWT( usuario.id, usuario.name );
+    const token = await generarJWT( usuario.id, usuario.name, email );
 
     // Respuesta del servicio (la palabra return no es necesaria/obligatoria)
     return res.json({
       ok: true,
       uid: usuario.id,
       name: usuario.name,
-      token
+      token,
+      email
     });
 
 
@@ -97,14 +99,18 @@ const loginUsuario = async(req, res = response) => {
 
 const revalidarToken = async(req, res = response) => {
 
-  const { uid, name } = req;
+  const { uid } = req;
 
-  const token = await generarJWT( uid, name );
+  // Leer la BD
+  const dbUser = await Usuario.findById(uid);
+
+  const token = await generarJWT( uid, dbUser.name );
 
   return res.json({
     ok: true,
     uid,
-    name,
+    name: dbUser.name,
+    email: dbUser.email,
     token
   });
 
