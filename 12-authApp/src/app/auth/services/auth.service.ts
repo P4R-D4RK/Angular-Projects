@@ -23,7 +23,25 @@ export class AuthService {
   constructor( private http: HttpClient ) { }
 
   register( name: string, email: string, password: string) {
-    
+
+    const url = `${ this.baseUrl }/auth/new`;
+    const body = { name, email, password };
+
+    return this.http.post<AuthResponse>( url, body)
+      .pipe(
+        tap( resp => {
+          if( resp.ok ) {
+            localStorage.setItem('token', resp.token! );
+              this._user = {
+                name: resp.name!,
+                uid: resp.uid!
+              }
+          }
+        }),
+        map( resp => resp.ok ),
+        catchError( err => of(err.error.msg) )
+      );
+
   }
 
 
