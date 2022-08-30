@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
@@ -22,6 +22,11 @@ export class AuthService {
 
   constructor( private http: HttpClient ) { }
 
+  register( name: string, email: string, password: string) {
+    
+  }
+
+
   login( email: string, password: string ) {
     
     const url = `${ this.baseUrl }/auth`;
@@ -31,6 +36,7 @@ export class AuthService {
       .pipe(
         tap( resp => {
           if( resp.ok ) {
+            localStorage.setItem('token', resp.token! );
             this._user = {
               name: resp.name!,
               uid: resp.uid!
@@ -38,7 +44,32 @@ export class AuthService {
           }
         }),
         map( resp => resp.ok ),
+        catchError( err => of(err.error.msg) )
+      );
+  }
+
+  valdiarToken(): Observable<boolean> {
+    
+    const url = `${ this.baseUrl }/auth/renew`;
+    const headers = new HttpHeaders()
+      .set('x-token', localStorage.getItem('token')! || '');
+
+    return this.http.get<AuthResponse>( url, { headers } )
+      .pipe(
+        map( resp => {
+
+          localStorage.setItem('token', resp.token! );
+          this._user = {
+            name: resp.name!,
+            uid: resp.uid!
+          }
+          return resp.ok;
+        }),
         catchError( err => of(false) )
       );
-    }
+  }
+
+  logout() {
+    localStorage.clear();
+  }
 }
